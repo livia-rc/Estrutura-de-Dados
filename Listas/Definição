@@ -1,0 +1,34 @@
+Uma estrutura do tipo LISTA é uma sequência de elementos do mesmo tipo. Seus elementos possuem estrutura interna abstraída, ou seja, sua complexidade é arbitrária e não afeta o seu funcionamento.
+
+Uma lista pode possuir N elementos. Se N = 0 dizemos que a lista está vazia
+
+Aplicações
+- Cadastro de funcionários
+- Itens em estoque
+
+Operações Básicas
+- Criação da lista
+- Inserção de um elemento
+- Exclusão de um elemento
+- Acesso a um elemento
+
+
+
+---------- LISTA ESTÁTICA SEQUENCIAL ----------
+
+Tipo de Lista onde o sucessor de um elemento ocupa a posição física seguinte do mesmo em um array
+
+- Vantagens
+  - Acesso rápido e direto aos elementos (índice)
+  - Tempo constante para acessar um elemento
+  - Facilidade em modificar informações
+
+- Desvantagens
+  - Definição prévia do tamanho do array
+  - Dificuldade para inserir e remover um elemento entre outros dois 
+
+- Quando utilizar?
+  - Listas pequenas
+  - Inserção/remoção apenas no final da lista
+  - Tamanho máximo bem definido
+  - A busca é a operação mais frequente
