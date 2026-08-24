@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "ListaEstáticaSequencial.h"
+#include "ListaEstaticaSequencial.h"
 
 int main(){
 

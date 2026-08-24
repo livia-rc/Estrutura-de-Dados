@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "ListaEstáticaSequencial.h"
+#include "ListaEstaticaSequencial.h"
 
 Lista* cria_lista(){
     Lista *li; //declaração do ponteiro que apontará para uma estrutura Lista
