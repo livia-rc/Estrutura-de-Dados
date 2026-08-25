@@ -103,3 +103,113 @@ int insere_lista_ordenada(Lista* li, struct aluno aluno){// Insere um aluno mant
     }
     return 1; // Inserção realizada com sucesso.
 }
+
+int remove_lista_final(Lista* li){
+    if(li == NULL){ //verifica se a lista existe 
+        return 0;
+    } else if (li->quantidade == 0){ //verificanse há elementos na lista
+        return 0;
+    } else{ //aqui a lista existe e possui pelo menos um elemento
+        li->quantidade--; //o ultimo elemento é removido e a lista é decrementada
+    }
+    return 1; //remoção concluída
+}
+
+int remove_lista_inicio(Lista* li){
+    if (li == NULL){ //verifica se a lista existe se li for null não temos uma lista válida
+        return 0;
+    } else if (li->quantidade == 0){ //verifica se há elementos na lista
+        return 0;
+    } else {
+        for (int i = 0; i < li->quantidade - 1; i++){ //esse for desloca todos os elementos uma posição para a esquerda 
+            li->dados[i] = li->dados[i+1];
+        }
+        li->quantidade--; //decrementa a lista em uma posição
+    }
+    return 1; //remoção concluída
+}
+
+//essa função vai remover um aluno procurando pela matrícula
+int remove_lista(Lista* li, int mat){
+    if(li == NULL){ //verifica se a lista existe 
+        return 0;
+    } else if(li->quantidade == 0){ //verifica se a há elementos na lista
+        return 0;
+    }
+
+    int k,i = 0; //a variável i é usada para procurar elementos e a variável k é usada para deslocar elementos
+    
+    while(i < li->quantidade && li->dados[i].matricula != mat){ //procurar em qual posição está a matrícula que desejamos remover
+        // Percorremos a lista enquanto:
+        // i ainda estiver dentro da quantidade de elementos e a matrícula encontrada na posição i for diferente da matrícula que estamos procurando.
+        i++;
+    }
+
+    if(i == li->quantidade){ //Se i chegou a ser igual à quantidade, significa que percorremos toda a parte válida da lista e não encontramos a matrícula.
+        return 0; //dessa forma retorna 0
+    }
+
+    // A matrícula foi encontrada na posição i. Agora precisamos remover o elemento dessa posição e deslocar todos os elementos que estão
+    // depois do elemento removido uma posição para a esquerda.
+    for(k=i; k< li->quantidade-1; k++){
+        li->dados[k] = li->dados[k+1];
+    }
+
+    li->quantidade--;
+    return 1;
+}
+
+int consulta_lista_posicao(Lista* li, int posicao, struct aluno *aluno){
+    if (li == NULL || posicao <= 0 || posicao > li->quantidade){ //se a lista não existir ou a posição for menor ou igual a zero ou a posição for maior que a quantidade de elementos da lista vai retornar null
+        return 0;
+    } else {
+        *aluno = li->dados[posicao - 1]; 
+        // A posição informada pelo usuário começa em 1 mas os índices do vetor começam em 0.
+        // Exemplo:
+        // posicao = 1
+        // índice do vetor = 1 - 1 = 0
+        // Depois de encontrar o aluno, copiamos seus dados para a variável apontada por 'aluno'.
+    }
+    return 1; //retorna 1 quando a consulta for realizada com sucesso
+}
+
+int consulta_lista_matricula(Lista* li, int matricula, struct aluno *aluno){ // A função recebe a lista que será consultada, matrícula que queremos procurar e endereço da variável que receberá o aluno
+    if (li == NULL){ //veificamos se a lista existe 
+        return 0;
+    }
+
+    int i = 0;
+
+    //procedimento de busca igual como fizemos para remover por matrícula
+    while (i < li->quantidade && li->dados[i].matricula != matricula){ //percorremos a lista procurando a matrícula
+        // O while continua enquanto:
+        // 1. i ainda estiver dentro da quantidade de elementos;
+        // 2. a matrícula do aluno atual for diferente da matrícula que estamos procurando.
+        i++;
+    }
+    
+    if(i == li->quantidade){ //chegou ao final da lista e não achamos a matrícula vai retornar null indicando que a consulta falhou
+        return 0;
+    }
+    
+    // Se chegamos aqui, significa que encontramos a matrícula na posição 'i'.
+    // Copiamos o aluno encontrado para a variável apontada por 'aluno'.
+    *aluno = li->dados[i];
+    return 1; // Retorna 1 indicando que o aluno foi encontrado.
+}
+
+// Essa função percorre todos os alunos armazenados e mostra seus dados na tela.
+void imprime_lista(Lista* li){
+    if(li == NULL){ // Verifica se a lista existe.
+        return;
+    }
+    int i;
+    for(i=0; i< li->quantidade; i++){
+        printf("Matricula: %d\n",li->dados[i].matricula); //exib a matrícula do aluno atual
+        printf("Nome: %s\n",li->dados[i].nome); //exibe o nome do aluno atual
+        printf("Notas: %.2f %.2f %.2f\n",li->dados[i].n1, //exibe as tres notas do aluno atual
+                                   li->dados[i].n2,
+                                   li->dados[i].n3);
+        printf("-------------------------------\n"); // Imprime uma linha para separar um aluno do próximo e organizar a saída
+    }
+}
